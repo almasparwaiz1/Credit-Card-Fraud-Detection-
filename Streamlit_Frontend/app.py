@@ -5,7 +5,7 @@ import joblib
 import os
 
 # --- Configuration & Explicit Paths --- 
-BASE_DIR = r"F:\AI and Data Science Projects\house price prediction app\Streamlit_Frontend"
+BASE_DIR = r"Streamlit_Frontend"
 
 MODEL_PATH = os.path.join(BASE_DIR, 'stacking_model.joblib')
 SCALER_PATH = os.path.join(BASE_DIR, 'scaler.joblib')
@@ -15,19 +15,21 @@ FEATURE_COLUMNS_PATH = os.path.join(BASE_DIR, 'feature_columns.joblib')
 @st.cache_resource
 def load_resources():
     """Loads the pre-trained model, scaler, and feature columns safely."""
-    try:
-        model = joblib.load(MODEL_PATH)
-        scaler = joblib.load(SCALER_PATH)
-        feature_columns = joblib.load(FEATURE_COLUMNS_PATH)
-        return model, scaler, feature_columns
-    except FileNotFoundError:
-        st.error(f"Error: Required file missing. Please ensure assets are saved inside: {BASE_DIR}")
-        st.stop()
-    except Exception as e:
-        st.error(f"Error loading system assets: {e}")
-        st.stop()
+    # We let exceptions bubble up naturally so they can be handled outside the cache layer
+    model = joblib.load(MODEL_PATH)
+    scaler = joblib.load(SCALER_PATH)
+    feature_columns = joblib.load(FEATURE_COLUMNS_PATH)
+    return model, scaler, feature_columns
 
-model, scaler, feature_columns = load_resources()
+# Safely call the resource loader before building the UI
+try:
+    model, scaler, feature_columns = load_resources()
+except FileNotFoundError:
+    st.error(f"❌ Error: Required file missing. Please ensure assets are saved inside: {BASE_DIR}")
+    st.stop()
+except Exception as e:
+    st.error(f"❌ Error loading system assets: {e}")
+    st.stop()
 
 # --- Preprocessing Function ---
 def preprocess_input(input_dict: dict) -> pd.DataFrame:
@@ -70,7 +72,7 @@ def make_prediction(processed_data: pd.DataFrame):
 
 # --- Streamlit Corporate UI Overrides ---
 st.set_page_config(
-    page_title="Risk Assessment Portal | Credit Fraud Evaluation",
+    page_title="Credit Card Fraud Detection System",
     page_icon="💳",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -119,23 +121,21 @@ st.markdown("""
 # --- Main App Header Layout ---
 col_header, col_status = st.columns([3, 1])
 with col_header:
-    st.title("💳 Transaction Fraud Evaluation Hub")
-    st.markdown("Real-time operational risk assessment dashboard tracking behavioral vector signatures.")
+    st.title("💳 Credit Card Fraud Detection System")
+    st.markdown("AI-powered real-time fraud detection to identify and prevent suspicious transactions with high accuracy and speed.")
 with col_status:
-    st.caption("System Diagnostics")
-    st.success("Analysis Engine Online")
+    st.caption("")
+    st.success("")
 
 st.markdown("---")
 
 # --- Sidebar Configuration ---
-st.sidebar.markdown("### Transaction Vector Controls")
-st.sidebar.markdown("Manipulate the engineered component values below to simulate live transaction behavior.")
 
 input_data = {}
 
 # Partition inputs layout inside the sidebar for maximum professionalism
-with st.sidebar.expander("💳 Main Fiscal Attributes", expanded=True):
-    input_data['Amount'] = st.slider('Transaction Value (USD Amount)', 0.01, 25000.0, 150.0, step=0.1, format="$%.2f")
+with st.sidebar.expander("💳 Main Fiscal Attributes"):
+    input_data['Amount'] = st.sidebar.slider('Transaction Value (USD Amount)', 0.01, 25000.0, 150.0, step=0.1, format="$%.2f")
 
 with st.sidebar.expander("🧬 Component Component Signals V1 - V14", expanded=False):
     for i in range(1, 15):
@@ -208,14 +208,6 @@ with layout_left:
             </div>
         """, unsafe_allow_html=True)
 
-with layout_right:
-    st.subheader("Model Insights")
-    st.markdown(f"""
-        **Pipeline Framework Architecture:**
-        * **Ensemble Strategy:** Stacking Regressor Meta-Learner
-        * **Active Features Supervised:** {len(feature_columns)} Active Nodes
-        * **Data Scaler Mode:** Robust Scaling Standard Matrix
-    """)
     
     with st.expander("🔍 Inspection Payload"):
         st.caption("Engineered input profile ready for inference:")
