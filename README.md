@@ -1,9 +1,9 @@
-# 💳 Credit Card Fraud Detection System
+## 💳 Credit Card Fraud Detection System
 
 AI-powered real-time fraud detection web application built with **Streamlit**, **Machine Learning**, and advanced **feature engineering** techniques to identify suspicious credit card transactions with high accuracy and enterprise-grade risk analysis.
 
 
-## Project Overview
+### Project Overview
 
 The **Credit Card Fraud Detection System** is a production-ready machine learning application designed to detect fraudulent credit card transactions in real time.
 
@@ -18,11 +18,11 @@ The system leverages:
 This application simulates how modern financial institutions monitor transaction anomalies and assess fraud risk instantly.
 
 
-## Live Demo
+### Live Demo
 
 https://credit-card-fraud-detection-appi.streamlit.app/
 
-## Key Features
+### Key Features
 
 Real-time fraud probability prediction
 Professional enterprise-level Streamlit UI
@@ -36,11 +36,11 @@ Fraud threat-level monitoring dashboard
 Inspection payload visualization for transparency
 
 
-## Machine Learning Workflow
+### Machine Learning Workflow
 
 The application follows a complete ML inference pipeline:
 
-### User Input Collection
+#### User Input Collection
 
 Users provide:
 
@@ -48,36 +48,35 @@ Users provide:
 * V1–V28 anonymized transaction components
 
 
-### Feature Engineering
+#### Feature Engineering
 
 Custom engineered features include:
 
-#### Interaction Features
+##### Interaction Features
 
 * Amount × V1
 * Amount × V2
 * Amount × V3
 * Amount × V4
 
-#### Polynomial Features
+##### Polynomial Features
 
 * Amount²
 * Amount³
 
-#### Ratio Features
+##### Ratio Features
 
 * V1 / V2
 
 
-### Data Preprocessing
+#### Data Preprocessing
 
 * Feature alignment validation
 * Scaling using trained scaler
 * Consistent training-inference architecture matching
 
----
 
-### Fraud Prediction
+#### Fraud Prediction
 
 The trained stacking ensemble model predicts:
 
@@ -85,7 +84,7 @@ The trained stacking ensemble model predicts:
 * Transaction risk classification
 
 
-### Risk Evaluation Engine
+#### Risk Evaluation Engine
 
 The system categorizes transactions into:
 
@@ -96,7 +95,7 @@ The system categorizes transactions into:
 | 🚨 Critical Risk | ≥ 50%             | Fraud Detected         |
 
 
-## Model Performance
+### Model Performance
 
 | Metric    | Score |
 | --------- | ----- |
@@ -107,7 +106,7 @@ The system categorizes transactions into:
 | ROC-AUC   | 100% |
 
 
-## Enterprise Risk Evaluation Logic
+### Enterprise Risk Evaluation Logic
 
 The application evaluates transaction behavior patterns using:
 
@@ -124,7 +123,7 @@ This creates a highly robust fraud detection pipeline suitable for:
 * Financial security platforms
 
 
-## Security & Reliability
+### Security & Reliability
 
 * Cached resource loading for efficiency
 * Safe model loading mechanism
@@ -134,7 +133,7 @@ This creates a highly robust fraud detection pipeline suitable for:
 * Structured exception management
 
 
-## Author
+### Author
 
 #### Almas Parwaiz
 
@@ -147,7 +146,7 @@ Data Science & AI Enthusiast passionate about:
 * Intelligent Financial Systems
 
 
-## Support
+### Support
 
 If you found this project helpful:
 
@@ -156,6 +155,6 @@ Fork the project
 Share with others
 
 
-## Final Note
+### Final Note
 
 This project demonstrates how machine learning can enhance financial security by identifying fraudulent activities in real time with scalable and production-ready AI systems.
